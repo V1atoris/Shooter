@@ -103,6 +103,7 @@ void AShooterCharacter::FireWeapon()
 			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), MuzzleFlash, SocketTransform);
 
 		}
+		///*** new
 
 		
 		FVector BeamEnd;

@@ -40,6 +40,7 @@ protected:
 	/** Called when the Fire Button is pressed */
 	void FireWeapon();
 
+	//*** Renew FireWeapon
 	bool GetBeamEndLocation(const FVector& MuzzleSocketLocation, FVector& OutBeamLocation);
 
 public:	
