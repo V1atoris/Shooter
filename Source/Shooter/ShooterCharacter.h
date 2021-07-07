@@ -65,6 +65,8 @@ protected:
 	//*** Set Base Turn Rate and Base Look up rate based on aiming
 	void SetLookRates();
 
+	void CalculateCrosshairSpread(float DeltaTime);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -88,6 +90,8 @@ private:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final turn rate */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		float BaseLookUpRate;
+	
+	
 	//*** Turn rate while not aiming
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		float HipTurnRate;
@@ -149,6 +153,22 @@ private:
 	//*** Interp speed for zooming aiming
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	float ZoomInterpSpeed;
+
+	//*** Determines the spread of crosshairs 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
+	float CrosshairSpreadMultiplier;
+	//*** Velocity component for crosshairs spread
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
+	float CrosshairVelocityFactor;
+	//*** In Air component for crosshairs spread
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
+	float CrosshairInAirFactor;
+	//*** Aim component for crosshairs spread
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
+	float CrosshairAimFactor;
+	//*** Shooting component for crosshairs spread
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
+	float CrosshairShootingFactor;
 
 	
 
