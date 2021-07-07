@@ -47,6 +47,8 @@ protected:
 	void AimingButtonPressed();
 	void AimingButtonRelessed();
 
+	void CameraInterpZoom(float DeltaTime);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -101,6 +103,13 @@ private:
 	//*** FOV value when zoomed in
 	float CameraZoomedFOV;
 
+	//** Current FOV this frame
+	float CameraCurrentFOV;
+
+	//*** Interp speed for zooming aiming
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	float ZoomInterpSpeed;
+
 	
 
 public:
@@ -111,5 +120,7 @@ public:
 
 	/** Returns FollowCamera subobject */
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	FORCEINLINE bool GetAiming() const { return bAiming; }
 
 };
