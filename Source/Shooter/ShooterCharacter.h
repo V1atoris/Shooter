@@ -82,7 +82,7 @@ protected:
 	void AutoFireReset();
 
 	//*** Line Trace for items under crosshairs
-	bool TraceUnderCrosshairs(FHitResult& OutHitResult);
+	bool TraceUnderCrosshairs(FHitResult& OutHitResult, FVector& OutHitLocation);
 
 
 public:	

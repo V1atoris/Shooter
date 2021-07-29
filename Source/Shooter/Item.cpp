@@ -4,6 +4,7 @@
 #include "Item.h"
 #include "Components/BoxComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Components/SphereComponent.h"
 
 // Sets default values
 AItem::AItem()
@@ -22,6 +23,8 @@ AItem::AItem()
 	PickupWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("PickupWidget"));
 	PickupWidget->SetupAttachment(GetRootComponent());
 
+	AreaSphere = CreateDefaultSubobject<USphereComponent>(TEXT("AreaSphere"));
+	AreaSphere->SetupAttachment(GetRootComponent());
 
 }
 
@@ -32,6 +35,11 @@ void AItem::BeginPlay()
 	
 	//** Hide PickupWidget
 	PickupWidget->SetVisibility(false);
+
+
+	//** Setup overlap for AreaSphere
+	AreaSphere->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnSphereOverlap);
+
 
 }
 
