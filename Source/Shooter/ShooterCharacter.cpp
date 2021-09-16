@@ -52,9 +52,11 @@ AShooterCharacter::AShooterCharacter() :
 	ShootTimeDuration(0.05f),
     bFiringBullet(false),
 	//*** Automatic gunfire variables
-	AutomaticFireRate(0.1f),
-	bShouldFire(true),
+	
+	
 	bFireButtonPressed(false),
+	bShouldFire(true),
+	AutomaticFireRate(0.1f),
 	//*** ItemTrace variables
 	bShouldTraceForItems(false),
 	OverlappedItemCount(0),
@@ -514,8 +516,9 @@ void AShooterCharacter::SelectButtonPressed()
 {
 	if (TraceHitItem)
 	{
-		auto TraceHitWeapon = Cast<AWeapon>(TraceHitItem);
-		SwapWeapon(TraceHitWeapon);
+		///auto TraceHitWeapon = Cast<AWeapon>(TraceHitItem);
+		///SwapWeapon(TraceHitWeapon);
+		TraceHitItem->StartItemCurve(this);
 	}
 }
 

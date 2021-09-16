@@ -66,6 +66,12 @@ protected:
 	//*** Set Item properties based on state
 	void SetItemProperies(EItemState State);
 
+	//*** Called when ItemInterpTimer is finished
+	void FinishInterping();
+
+	//*** Handles itme interpolation when in the EquipInterp state
+	void ItemInterp(float DeltaTime);
+
 
 
 public:	
@@ -111,7 +117,34 @@ private:
 
 	//*** The curve asset to use for the Item's location when interping
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item Properties", meta = (AllowPrivateAccess = "true"))
-	class UCurveFloat* ItemZCUrve;
+	class UCurveFloat* ItemZCurve;
+
+	//*** Starting Location when Interp begins
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Item Properties", meta = (AllowPrivateAccess = "true"))
+	FVector ItemInterpStartLocation;
+
+	//*** Target interp location in fron of the camera
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Item Properties", meta = (AllowPrivateAccess = "true"))
+	FVector CameraTargetLocation;
+
+	//*** True when interping
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Item Properties", meta = (AllowPrivateAccess = "true"))
+	bool bInterping;
+
+	//*** Plays when we start interping
+	FTimerHandle ItemInterpTimer;
+
+	//*** Duration of the curve and timer
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item Properties", meta = (AllowPrivateAccess = "true"))
+	float ZCurveTime;
+
+	//*** Pointer to the Character
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Item Properties", meta = (AllowPrivateAccess = "true"))
+	class AShooterCharacter* Character;
+
+	//*** X and Y for the EquipInterping;
+	float ItemInterpX;
+	float ItemInterpY;
 
 public:
 
@@ -123,4 +156,7 @@ public:
 	FORCEINLINE EItemState GetItemState() const { return ItemState; }
 	void SetItemState(EItemState State);
 	FORCEINLINE USkeletalMeshComponent* GetItemMesh() const{ return ItemMesh; }
+
+	//*** Call from the AShooterCharacter class
+	void StartItemCurve(AShooterCharacter* Char);
 };
